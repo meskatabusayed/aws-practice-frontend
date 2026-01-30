@@ -36,3 +36,39 @@ jobs:
 
       - name: Run tests
         run: pnpm test
+
+  build-code: 
+    runs-on: ubuntu-latest
+    needs: test-code
+
+    steps:
+      # 1️⃣ Setup pnpm FIRST (important)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10
+
+      # 2️⃣ Setup Node.js (after pnpm)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build the Codes
+        run: pnpm run build 
+
+  deploy-code: 
+    runs-on: ubuntu-latest  
+    needs: build-code   
+
+    steps:
+      - name: Deploy the Code
+        run: echo "deploying..."
