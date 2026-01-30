@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "type-check": "tsc --noEmit",
-    "test": "pnpm lint && pnpm type-check"
+  "build": "next build",
+  "start": "next start",
+
+  "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
+  "type-check": "tsc --noEmit",
+
+  "test": "pnpm run eslint && pnpm run type-check"
   },
   "dependencies": {
     "next": "16.1.6",
